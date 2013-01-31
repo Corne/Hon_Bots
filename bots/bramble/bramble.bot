@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bot
+    name="BrambleBot"
+    description="bot_description_bramble"
+    heroname="Hero_Plant"
+    rootlua="bramble_main.lua"
+    defaultplayername="BrambleBot"
+    precachepath="/heroes/plant"
+    />
