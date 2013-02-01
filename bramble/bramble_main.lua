@@ -35,6 +35,4 @@ BotEcho('Setting skill build')
 runfile "bots/bramble/bramble_skills.lua"
 BotEcho('skill build set')
 
-
-
 BotEcho('done loading bramble_main...')

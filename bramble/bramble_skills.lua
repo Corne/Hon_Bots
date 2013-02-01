@@ -10,9 +10,13 @@ local bramble_skills = object.bramble_skills
 
 local skills = object.skills
 
+-- set skillbuild
 runfile"bots/util/botmethods.lua"
-botmethods = object.botmethods
-botmethods.setSkillBuild(      
+object.botmethods.setSkillBuild(      
                     {0, 2, 0, 1, 0, 3,
                      0, 1, 1, 1, 3, 2,
                      2, 2, 4, 3})
+
+
+
+-- implement further skill logic
