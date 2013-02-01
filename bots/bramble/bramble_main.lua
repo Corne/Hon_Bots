@@ -2,31 +2,7 @@ local _G = getfenv(0)
 local object = _G.object
 
 object.myName = object:GetName()
-
-object.bRunLogic 	= true
-object.bRunBehaviors    = true
-object.bUpdates 	= true
-object.bUseShop 	= true
-
-object.bRunCommands 	= true 
-object.bMoveCommands 	= true
-object.bAttackCommands 	= true
-object.bAbilityCommands = true
-object.bOtherCommands 	= true
-
-object.bReportBehavior  = false
-object.bDebugUtility    = false
-object.bDebugExecute    = false
-
 object.logger = {}
-object.logger.bWriteLog     = false
-object.logger.bVerboseLog   = false
-
-object.core 		= {}
-object.eventsLib 	= {}
-object.metadata 	= {}
-object.behaviorLib 	= {}
-object.skills 		= {}
 
 runfile "bots/core.lua"
 runfile "bots/botbraincore.lua"
@@ -34,9 +10,16 @@ runfile "bots/eventsLib.lua"
 runfile "bots/metadata.lua"
 runfile "bots/behaviorLib.lua"
 
-local core = object.core
+core, behavior = {}
+local core, behavior = object.core, object.behaviorLib
 local BotEcho= core.BotEcho
 
-BotEcho('loading predator_main...')
+BotEcho('loading bramble_main...')
 
 object.heroName = 'Hero_Plant'
+
+
+runfile "bots/core.lua" --works
+runfile "bots/util/standarditembuilds.lua" --fails
+require "bots/core.lua" --works
+require "bots/util/standarditembuilds.lua" --fails
