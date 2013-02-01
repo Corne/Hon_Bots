@@ -28,9 +28,13 @@ object.heroName = 'Hero_Plant'
 BotEcho('Setting items')
 runfile "bots/bramble/bramble_items.lua"
 local brambleItems = object.bramble_items
-brambleItems.SetDefaultItems(behaviorLib)
+brambleItems.SetDefaultItems()
 BotEcho('Items set')
 
+BotEcho('Setting skill build')
+runfile "bots/bramble/bramble_items.lua"
+BotEcho('skill build set')
 
+runfile "bots/bramble/bramble_skills.lua"
 
 BotEcho('done loading bramble_main...')
