@@ -18,8 +18,16 @@ BotEcho('loading bramble_main...')
 
 object.heroName = 'Hero_Plant'
 
-
+--[[
 runfile "bots/core.lua" --works
 runfile "bots/util/standarditembuilds.lua" --fails
 require "bots/core.lua" --works
 require "bots/util/standarditembuilds.lua" --fails
+--]]
+
+require"/Hon_bots/bots/util/standarditembuilds.lua"
+standarditembuilds = standarditembuilds
+--BotEcho(standarditembuilds.tRegen2Totem)
+
+
+
