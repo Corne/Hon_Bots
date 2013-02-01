@@ -32,9 +32,9 @@ brambleItems.SetDefaultItems()
 BotEcho('Items set')
 
 BotEcho('Setting skill build')
-runfile "bots/bramble/bramble_items.lua"
+runfile "bots/bramble/bramble_skills.lua"
 BotEcho('skill build set')
 
-runfile "bots/bramble/bramble_skills.lua"
+
 
 BotEcho('done loading bramble_main...')

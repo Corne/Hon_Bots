@@ -3,9 +3,8 @@
 --]]
 
 --[[
-
     Author: Corné
-    File for (currently missing bot methods)
+    File for (currently) missing bot methods
 --]]
 local _G = getfenv(0)
 local object = _G.object
@@ -14,7 +13,9 @@ object.botmethods = object.botmethods or {}
 local botmethods = object.botmethods
 
 --[[
-Method for setting a bots skillbuild
+Method for setting a static skillbuild
+
+Missing values will be amplified with stats
 
 example:
 botmethods.setSkillBuild(      
