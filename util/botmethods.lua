@@ -23,7 +23,7 @@ botmethods.setSkillBuild(
              0, 1, 1, 1, 3, 2,
              2, 2, 4, 3})
 --]]
-function botmethods.setSkillBuild(tSkills)    
+function botmethods.SetSkillBuild(tSkills)    
     --set the skillbuild for botbraincore
     function object:SkillBuild()
         local unitSelf = self.core.unitSelf
@@ -36,4 +36,15 @@ function botmethods.setSkillBuild(tSkills)
         if nNextSkill == nil then nNextSkill = 4 end
         unitSelf:GetAbility(nNextSkill):LevelUp()
     end
+end
+
+
+--TODO implement method for default melee last hitting
+function botmethods.SetDefaultMeleeLastHitting()
+    
+end
+
+--TODO implement method for default ranged last hitting
+function botmethods.SetDefaultMeleeLastHitting()
+    
 end

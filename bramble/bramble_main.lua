@@ -2,13 +2,30 @@ local _G = getfenv(0)
 local object = _G.object
 
 object.myName = object:GetName()
+ 
+object.bRunLogic         = true
+object.bRunBehaviors    = true
+object.bUpdates         = true
+object.bUseShop         = true
+ 
+object.bRunCommands     = true
+object.bMoveCommands     = true
+object.bAttackCommands     = true
+object.bAbilityCommands = true
+object.bOtherCommands     = true
+ 
+object.bReportBehavior = false
+object.bDebugUtility = false
+ 
 object.logger = {}
-
-object.core 		= {}
-object.eventsLib 	= {}
-object.metadata 	= {}
-object.behaviorLib 	= {}
-object.skills 		= {}
+object.logger.bWriteLog = false
+object.logger.bVerboseLog = false
+ 
+object.core         = {}
+object.eventsLib     = {}
+object.metadata     = {}
+object.behaviorLib     = {}
+object.skills         = {}
 
 runfile "bots/core.lua"
 runfile "bots/botbraincore.lua"
@@ -33,6 +50,7 @@ BotEcho('Items set')
 
 BotEcho('Setting skill build')
 runfile "bots/bramble/bramble_skills.lua"
+local brambleSkills = object.bramble_skills
 BotEcho('skill build set')
 
 BotEcho('done loading bramble_main...')
