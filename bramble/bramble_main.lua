@@ -38,19 +38,20 @@ local core, eventsLib, behaviorLib, metadata, skills =
 
 local BotEcho, VerboseLog, BotLog = core.BotEcho, core.VerboseLog, core.BotLog
 
+FILEPATH = "bots/bramble/"
+SKILLSFILEPATH = FILEPATH .. "skills/"
+
 BotEcho('loading bramble_main...')
 
 object.heroName = 'Hero_Plant'
 
-BotEcho('Setting items')
-runfile "bots/bramble/bramble_items.lua"
+
+runfile (FILEPATH .. "bramble_items.lua")
 local brambleItems = object.bramble_items
 brambleItems.SetDefaultItems()
-BotEcho('Items set')
 
-BotEcho('Setting skill build')
-runfile "bots/bramble/bramble_skills.lua"
+runfile (SKILLSFILEPATH .. "bramble_skills.lua")
 local brambleSkills = object.bramble_skills
-BotEcho('skill build set')
+
 
 BotEcho('done loading bramble_main...')

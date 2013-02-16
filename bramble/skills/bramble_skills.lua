@@ -28,6 +28,5 @@ object.botmethods.SetSkillBuild(
                      0, 1, 1, 1, 3, 2,
                      2, 2, 4, 3})
 
---TODO: bind skills!
 
-runfile "bots/bramble/bramble_combat.lua"
+runfile(SKILLSFILEPATH .. "EnsnaringShrubbery.lua");
