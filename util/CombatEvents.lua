@@ -14,7 +14,7 @@ function object:OnCombatEvent(EventData)
     self:OnCombatEventOld(EventData)
 
     if(EventData.Type == 'Damage') then
-        object.core.BotEcho(EventData.Type)
+        --object.core.BotEcho(EventData.Type)
         CombatEvents.OnDamageTaken(EventData.DamageApplied, EventData.SourceUnit)
     end
 end

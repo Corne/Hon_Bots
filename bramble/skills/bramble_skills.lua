@@ -28,5 +28,7 @@ object.botmethods.SetSkillBuild(
                      0, 1, 1, 1, 3, 2,
                      2, 2, 4, 3})
 
-
+--Use of EnsnaringShrubbery is in its own file
 runfile(SKILLSFILEPATH .. "EnsnaringShrubbery.lua");
+
+runfile(SKILLSFILEPATH .. "SporeBreath.lua");
