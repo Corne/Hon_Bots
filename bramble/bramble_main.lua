@@ -50,7 +50,7 @@ runfile (FILEPATH .. "bramble_items.lua")
 local brambleItems = object.bramble_items
 brambleItems.SetDefaultItems()
 
-runfile (SKILLSFILEPATH .. "bramble_skills.lua")
+runfile (FILEPATH .. "bramble_combat.lua")
 local brambleSkills = object.bramble_skills
 
 

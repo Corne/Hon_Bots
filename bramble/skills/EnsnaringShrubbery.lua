@@ -12,18 +12,22 @@ local core, behaviorLib = object.core, object.behaviorLib;
 EnsnaringShrubbery.bShouldUse = false;
 
 
-local function SetUseEnsnaringShrubbery(damageTaken)
+function EnsnaringShrubbery.SetAgressiveEnsnaringShrubbery( harassUtil )
+    local ensnaring = core.unitSelf:GetAbility(1)
+    EnsnaringShrubbery.bShouldUse = (harassUtil >= 75) and ensnaring:CanActivate();
+end
+
+local function SetDefenceEnsnaringShrubbery(damageTaken)
     local ensnaring = core.unitSelf:GetAbility(1)
     if (damageTaken > (core.unitSelf:GetMaxHealth()*0.1)) and ensnaring:CanActivate() then
         EnsnaringShrubbery.bShouldUse = true
         return;
     end
-    EnsnaringShrubbery.bShouldUse = false
 end
 
 runfile("bots/util/CombatEvents.lua")
 local function OnDamageTakenOverride(damage, sourceUnit)
-    SetUseEnsnaringShrubbery(damage) 
+    SetDefenceEnsnaringShrubbery(damage) 
 end
 object.CombatEvents.OnDamageTaken = OnDamageTakenOverride
 
@@ -36,12 +40,15 @@ function behaviorLib.DefenceSkillUtility(botBrain)
 end
 
 function behaviorLib.DefenceSkillExecute(botBrain)
-    local ensnaring = core.unitSelf:GetAbility(1)
     if(EnsnaringShrubbery.bShouldUse) then
-        core.OrderAbilityEntity(botBrain, ensnaring, core.unitSelf);
-        EnsnaringShrubbery.bShouldUse = false;
-        return;
+        EnsnaringShrubbery.Activate( botBrain )
     end
+end
+
+function EnsnaringShrubbery.Activate( botBrain )
+    local ensnaring = core.unitSelf:GetAbility(1)
+    core.OrderAbilityEntity(botBrain, ensnaring, core.unitSelf);
+    EnsnaringShrubbery.bShouldUse = false;
 end
 
 behaviorLib.DefenceSkillBehavior = {}
