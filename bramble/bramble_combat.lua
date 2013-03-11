@@ -34,30 +34,37 @@ local ensnaringShrubbery = object.EnsnaringShrubbery;
 runfile(SKILLSFILEPATH .. "SporeBreath.lua");
 local sporeBreath = object.SporeBreath;
 
+runfile(SKILLSFILEPATH .. "VineWall.lua");
+local vineWall = object.VineWall;
+
 --test set-up for spore breath
---TODO move to BRAMBLE COMBAT
 local function CustomHarassUtilityFnOverride(unitTarget)    
     sporeBreath.SetUseSporeBreath(unitTarget)
-
-    nHarrassUtil = math.floor((core.unitSelf:GetHealth() / core.unitSelf:GetMaxHealth()) / (unitTarget:GetHealth() / unitTarget:GetMaxHealth()) ) *25;
-    core.BotEcho('HarrasUtil: ' .. nHarrassUtil)
+    --really defensive atm, need to be more aggresive, in some cases
+    nHarrassUtil = nHarrassUtil * 0.3; -- save some old aggresivnes
+    nHarrassUtil = nHarrassUtil + math.floor((core.unitSelf:GetHealth() / core.unitSelf:GetMaxHealth()) / (unitTarget:GetHealth() / unitTarget:GetMaxHealth()) ) *25;
+    core.BotEcho('nHarrassUtil' .. nHarrassUtil)
     ensnaringShrubbery.SetAgressiveEnsnaringShrubbery(nHarrassUtil)
+
+    vineWall.SetUseVineWall(unitTarget)
     return nHarrassUtil
 end
 behaviorLib.CustomHarassUtility = CustomHarassUtilityFnOverride  
 
 
 local function HarassHeroExecuteOverride(botBrain)
-    
-    if(sporeBreath.bShouldUse) then
-        local abilSporebreath = core.unitSelf:GetAbility(0);
-        core.OrderAbility(botBrain, abilSporebreath, true, true)
-        sporeBreath.bShouldUse = false;
+    core.BotEcho('HELLO' )
+    --core.BotEcho( vineWall.bShouldActivate)
+    if(sporeBreath.bShouldActivate) then
+        sporeBreath.Activate(botBrain)    
+    elseif(ensnaringShrubbery.bShouldActivate) then
+    	ensnaringShrubbery.Activate( botBrain , core.unitSelf )
+    elseif(vineWall.bShouldActivate) then
+        core.BotEcho('HELLO 2' )
+        vineWall.Activate(botBrain);
+    else
+        object.harassExecuteOld(botBrain)
     end
-    if(ensnaringShrubbery.bShouldUse) then
-    	EnsnaringShrubbery.Activate( botBrain )
-    end
-    object.harassExecuteOld(botBrain)
 end
 object.harassExecuteOld = behaviorLib.HarassHeroBehavior["Execute"]
 behaviorLib.HarassHeroBehavior["Execute"] = HarassHeroExecuteOverride

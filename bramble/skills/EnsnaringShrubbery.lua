@@ -9,18 +9,18 @@ object.EnsnaringShrubbery = object.EnsnaringShrubbery or {}
 local EnsnaringShrubbery = object.EnsnaringShrubbery
 
 local core, behaviorLib = object.core, object.behaviorLib;
-EnsnaringShrubbery.bShouldUse = false;
+EnsnaringShrubbery.bShouldActivate = false;
 
 
 function EnsnaringShrubbery.SetAgressiveEnsnaringShrubbery( harassUtil )
     local ensnaring = core.unitSelf:GetAbility(1)
-    EnsnaringShrubbery.bShouldUse = (harassUtil >= 75) and ensnaring:CanActivate();
+    EnsnaringShrubbery.bShouldActivate = (harassUtil >= 75) and ensnaring:CanActivate();
 end
 
 local function SetDefenceEnsnaringShrubbery(damageTaken)
     local ensnaring = core.unitSelf:GetAbility(1)
     if (damageTaken > (core.unitSelf:GetMaxHealth()*0.1)) and ensnaring:CanActivate() then
-        EnsnaringShrubbery.bShouldUse = true
+        EnsnaringShrubbery.bShouldActivate = true
         return;
     end
 end
@@ -33,22 +33,23 @@ object.CombatEvents.OnDamageTaken = OnDamageTakenOverride
 
 
 function behaviorLib.DefenceSkillUtility(botBrain)
-    if(EnsnaringShrubbery.bShouldUse) then
+    if(EnsnaringShrubbery.bShouldActivate) then
         return 100;
     end
     return 0;
 end
 
+-- TODO only uses skill on himself atm, should use on other heroes aswell.
 function behaviorLib.DefenceSkillExecute(botBrain)
-    if(EnsnaringShrubbery.bShouldUse) then
-        EnsnaringShrubbery.Activate( botBrain )
+    if(EnsnaringShrubbery.bShouldActivate) then
+        EnsnaringShrubbery.Activate( botBrain, core.unitSelf )
     end
 end
 
-function EnsnaringShrubbery.Activate( botBrain )
+function EnsnaringShrubbery.Activate( botBrain , unit)
     local ensnaring = core.unitSelf:GetAbility(1)
-    core.OrderAbilityEntity(botBrain, ensnaring, core.unitSelf);
-    EnsnaringShrubbery.bShouldUse = false;
+    core.OrderAbilityEntity(botBrain, ensnaring, unit);
+    EnsnaringShrubbery.bShouldActivate = false;
 end
 
 behaviorLib.DefenceSkillBehavior = {}
