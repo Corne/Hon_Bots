@@ -41,7 +41,10 @@ local vineWall = object.VineWall;
 local function CustomHarassUtilityFnOverride(unitTarget)    
     sporeBreath.SetUseSporeBreath(unitTarget)
     --really defensive atm, need to be more aggresive, in some cases
-    nHarrassUtil = nHarrassUtil * 0.3; -- save some old aggresivnes
+    local  nHarrassUtil = behaviorLib.lastHarassUtil
+    if(nHarrassUtil) then
+        nHarrassUtil = nHarrassUtil * 0.3; -- save some old aggresivnes
+    end
     nHarrassUtil = nHarrassUtil + math.floor((core.unitSelf:GetHealth() / core.unitSelf:GetMaxHealth()) / (unitTarget:GetHealth() / unitTarget:GetMaxHealth()) ) *25;
     core.BotEcho('nHarrassUtil' .. nHarrassUtil)
     ensnaringShrubbery.SetAgressiveEnsnaringShrubbery(nHarrassUtil)
